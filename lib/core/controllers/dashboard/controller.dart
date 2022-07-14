@@ -3,14 +3,30 @@ part of flutter.recipes.core.controllers.dashboard;
 class DashboardController extends Cubit<DashboardState> with ControllerMixin {
   DashboardController() : super(DashboardState());
 
-  void selectCategory(Category selected) {
+  Future<void> selectCategory(Category selected) async {
     emit(
-      state.copyWith(selectedCategory: selected),
+      state.copyWith(
+        selectedCategory: selected,
+        getCategoryMealsStatus: RequestStatus.loading,
+      ),
+    );
+    List<Meal> categoryMeals =
+        await Repository.getMealsFromCategory(selected.name);
+    emit(
+      state.copyWith(
+        categoryMeals: categoryMeals,
+        getCategoryMealsStatus: RequestStatus.done,
+      ),
     );
   }
 
   Future<void> getDashboard(BuildContext context) async {
     try {
+      emit(
+        state.copyWith(
+          dashboardLoadStatus: RequestStatus.loading,
+        ),
+      );
       displayLoading(context);
       List<dynamic> data = await Future.wait([
         Repository.getRandomMeal(),
@@ -28,13 +44,13 @@ class DashboardController extends Cubit<DashboardState> with ControllerMixin {
           dailyMeal: dailyMeal,
           selectedCategory: selectedCategory,
           categoryMeals: categoryMeals,
-          dashboardLoadError: false,
+          dashboardLoadStatus: RequestStatus.done,
         ),
       );
     } on Exception {
       closeLoading();
       emit(
-        state.copyWith(dashboardLoadError: true),
+        state.copyWith(dashboardLoadStatus: RequestStatus.error),
       );
     }
   }

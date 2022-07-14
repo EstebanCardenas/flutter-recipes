@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:recipes/core/data/schema/schema.dart';
 
 export 'schema/schema.dart';
+export 'typing/typing.dart';
 
 part 'endpoints.dart';
 part 'repository.dart';

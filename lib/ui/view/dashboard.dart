@@ -34,14 +34,17 @@ class DashboardView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 22),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             MealCard(
-                              imgUrl: state.dailyMeal?.imgUrl ?? '',
                               name: state.dailyMeal?.name ?? '',
+                              imgUrl: state.dailyMeal?.imgUrl ?? '',
+                              dimension: MediaQuery.of(context).size.width - 44,
+                              category: state.dailyMeal?.category,
                             ),
                             const SizedBox(height: 24),
                             Text(
-                              'Main Categories',
+                              'Main categories',
                               style: Headings.h4,
                             ),
                             const SizedBox(height: 16),
@@ -77,22 +80,29 @@ class DashboardView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 22),
                         child: Column(
-                          children: List.generate(
-                            state.categoryMeals?.length ?? 0,
-                            (int idx) {
-                              Meal meal = state.categoryMeals![idx];
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  MealCard(
-                                    imgUrl: meal.imgUrl,
-                                    name: meal.name,
-                                  ),
-                                  const SizedBox(height: 16),
-                                ],
-                              );
-                            },
-                          ),
+                          children: state.getCategoryMealsStatus ==
+                                  RequestStatus.loading
+                              ? [const MealCardShimmer()]
+                              : state.getCategoryMealsStatus ==
+                                      RequestStatus.done
+                                  ? List.generate(
+                                      state.categoryMeals?.length ?? 0,
+                                      (int idx) {
+                                        Meal meal = state.categoryMeals![idx];
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            MealCard(
+                                              imgUrl: meal.imgUrl,
+                                              name: meal.name,
+                                            ),
+                                            const SizedBox(height: 16),
+                                          ],
+                                        );
+                                      },
+                                    )
+                                  : [],
                         ),
                       ),
                     ],

@@ -72,4 +72,8 @@ class Paragraphs {
     fontSize: 16,
     height: 22.4 / 16,
   );
+  static final TextStyle label = _base.copyWith(
+    fontSize: 14,
+    height: 19.6 / 14,
+  );
 }

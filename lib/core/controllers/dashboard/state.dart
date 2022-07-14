@@ -6,28 +6,35 @@ class DashboardState {
     this.categories,
     this.selectedCategory,
     this.categoryMeals,
-    this.dashboardLoadError,
+    this.dashboardLoadStatus,
+    this.getCategoryMealsStatus = RequestStatus.done,
   });
 
   final MealDetail? dailyMeal;
   final List<Category>? categories;
   final Category? selectedCategory;
   final List<Meal>? categoryMeals;
-  final bool? dashboardLoadError;
+
+  /// statuses
+  final RequestStatus? dashboardLoadStatus;
+  final RequestStatus? getCategoryMealsStatus;
 
   DashboardState copyWith({
     MealDetail? dailyMeal,
     List<Category>? categories,
     Category? selectedCategory,
     List<Meal>? categoryMeals,
-    bool? dashboardLoadError,
+    RequestStatus? dashboardLoadStatus,
+    RequestStatus? getCategoryMealsStatus,
   }) {
     return DashboardState(
       dailyMeal: dailyMeal ?? this.dailyMeal,
       categories: categories ?? this.categories,
       selectedCategory: selectedCategory ?? this.selectedCategory,
       categoryMeals: categoryMeals ?? this.categoryMeals,
-      dashboardLoadError: dashboardLoadError ?? this.dashboardLoadError,
+      dashboardLoadStatus: dashboardLoadStatus ?? this.dashboardLoadStatus,
+      getCategoryMealsStatus:
+          getCategoryMealsStatus ?? this.getCategoryMealsStatus,
     );
   }
 }

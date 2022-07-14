@@ -4,6 +4,7 @@ class MealDetail {
   MealDetail({
     required this.id,
     required this.name,
+    required this.category,
     required this.area,
     required this.instructions,
     required this.imgUrl,
@@ -14,6 +15,7 @@ class MealDetail {
 
   final int id;
   final String name;
+  final String category;
   final String area;
   final String instructions;
   final String imgUrl;
@@ -33,6 +35,7 @@ class MealDetail {
     return MealDetail(
       id: json.getInt('idMeal'),
       name: json.getString('strMeal'),
+      category: json.getString('strCategory'),
       area: json.getString('strArea'),
       instructions: json.getString('strInstructions'),
       imgUrl: json.getString('strMealThumb'),

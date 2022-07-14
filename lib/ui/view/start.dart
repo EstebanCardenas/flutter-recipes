@@ -7,9 +7,11 @@ class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<DashboardController, DashboardState>(
+      listenWhen: (DashboardState previous, DashboardState current) =>
+          previous.dashboardLoadStatus != current.dashboardLoadStatus,
       listener: (BuildContext listenerContext, DashboardState state) {
-        if (state.dashboardLoadError != null) {
-          if (!state.dashboardLoadError!) {
+        if (state.dashboardLoadStatus != null) {
+          if (state.dashboardLoadStatus == RequestStatus.done) {
             Navigator.of(listenerContext).pushNamed(DashboardView.route);
           }
         }
