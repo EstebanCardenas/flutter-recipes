@@ -5,3 +5,5 @@ const String kMealCategoriesUrl =
 const String kRandomMealUrl =
     'https://www.themealdb.com/api/json/v1/1/random.php';
 const String kFilterUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php';
+const String kMealDetailUrl =
+    'https://www.themealdb.com/api/json/v1/1/lookup.php';

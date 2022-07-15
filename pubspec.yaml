@@ -12,6 +12,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   http: ^0.13.4
   shimmer: ^2.0.0
+  youtube_player_flutter: ^8.1.0
 
 dev_dependencies:
   flutter_test:

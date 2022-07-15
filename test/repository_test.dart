@@ -6,4 +6,9 @@ void main() {
     List<Category> categories = await Repository.getMealCategories();
     expect(categories.length, greaterThan(0));
   });
+
+  test('Get meal detail', () async {
+    MealDetail detail = await Repository.getMealDetail(52772);
+    expect(detail.name, isNotEmpty);
+  });
 }

@@ -52,7 +52,7 @@ class CateogryCard extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     name,
-                    style: Paragraphs.p.copyWith(
+                    style: Regular.p.copyWith(
                       color: isSelected ? Colors.white : Colors.black,
                     ),
                     overflow: TextOverflow.clip,

@@ -27,4 +27,11 @@ class Repository {
       (int idx) => Meal.fromJson(meals[idx] as Map<String, dynamic>),
     );
   }
+
+  static Future<MealDetail> getMealDetail(int mealId) async {
+    http.Response response = await http.get(
+      Uri.parse('$kMealDetailUrl?i=$mealId'),
+    );
+    return MealDetail.fromJson(jsonDecode(response.body)['meals'][0]);
+  }
 }

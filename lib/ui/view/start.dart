@@ -12,7 +12,8 @@ class StartView extends StatelessWidget {
       listener: (BuildContext listenerContext, DashboardState state) {
         if (state.dashboardLoadStatus != null) {
           if (state.dashboardLoadStatus == RequestStatus.done) {
-            Navigator.of(listenerContext).pushNamed(DashboardView.route);
+            Navigator.of(listenerContext)
+                .pushReplacementNamed(DashboardView.route);
           }
         }
       },
@@ -41,13 +42,13 @@ class StartView extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Lets get\nCooking',
-                    style: Headings.bold.copyWith(color: Colors.white),
+                    style: Bold.bold.copyWith(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
                   Text(
                     'Find the best recipes for cooking',
-                    style: Paragraphs.p.copyWith(color: Colors.white),
+                    style: Regular.p.copyWith(color: Colors.white),
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
@@ -65,7 +66,7 @@ class StartView extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Start cooking',
-                          style: Headings.p.copyWith(color: Colors.white),
+                          style: Bold.p.copyWith(color: Colors.white),
                         ),
                         const SizedBox(width: 8),
                         const Icon(Icons.arrow_right_alt),

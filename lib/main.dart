@@ -13,6 +13,7 @@ class RecipesApp extends StatelessWidget {
   static final Map<String, Widget> routes = {
     StartView.route: const StartView(),
     DashboardView.route: const DashboardView(),
+    RecipeDetail.route: const RecipeDetail(),
   };
 
   @override

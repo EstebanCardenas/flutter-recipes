@@ -7,3 +7,4 @@ import 'package:shimmer/shimmer.dart';
 part 'meal_card.dart';
 part 'category_card.dart';
 part 'meal_card_shimmer.dart';
+part 'ingredient_card.dart';

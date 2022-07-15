@@ -6,10 +6,10 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -20,7 +20,7 @@ class DashboardView extends StatelessWidget {
                     const SizedBox(height: 24),
                     Text(
                       'Meal of the day',
-                      style: Headings.h4,
+                      style: Bold.h4,
                     ),
                     const SizedBox(height: 24),
                   ],
@@ -41,11 +41,15 @@ class DashboardView extends StatelessWidget {
                               imgUrl: state.dailyMeal?.imgUrl ?? '',
                               dimension: MediaQuery.of(context).size.width - 44,
                               category: state.dailyMeal?.category,
+                              onTap: () => Navigator.of(context).pushNamed(
+                                RecipeDetail.route,
+                                arguments: state.dailyMeal?.id,
+                              ),
                             ),
                             const SizedBox(height: 24),
                             Text(
                               'Main categories',
-                              style: Headings.h4,
+                              style: Bold.h4,
                             ),
                             const SizedBox(height: 16),
                           ],
@@ -96,6 +100,11 @@ class DashboardView extends StatelessWidget {
                                             MealCard(
                                               imgUrl: meal.imgUrl,
                                               name: meal.name,
+                                              onTap: () => Navigator.of(context)
+                                                  .pushNamed(
+                                                RecipeDetail.route,
+                                                arguments: meal.id,
+                                              ),
                                             ),
                                             const SizedBox(height: 16),
                                           ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Headings {
+class Bold {
   static const TextStyle _base = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w600,
@@ -37,7 +37,7 @@ class Headings {
   );
 }
 
-class Paragraphs {
+class Regular {
   static const TextStyle _base = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
