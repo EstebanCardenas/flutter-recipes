@@ -61,7 +61,11 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                 : state.detailStatus == RequestStatus.done
                     ? YoutubePlayerBuilder(
                         player: YoutubePlayer(
-                          controller: controller,
+                          controller: state.mealDetail!.videoUrl.isNotEmpty
+                              ? controller
+                              : YoutubePlayerController(
+                                  initialVideoId: '',
+                                ),
                         ),
                         builder: (BuildContext playerContext, Widget player) =>
                             SingleChildScrollView(
@@ -86,41 +90,52 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                                   style: Bold.h4,
                                 ),
                                 const SizedBox(height: 24),
-                                player,
+                                if (state.mealDetail!.videoUrl.isNotEmpty)
+                                  player
+                                else if (state.mealDetail!.imgUrl.isNotEmpty)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(24),
+                                    child:
+                                        Image.network(state.mealDetail!.imgUrl),
+                                  ),
                                 const SizedBox(height: 24),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text(
-                                      'Ingredients',
-                                      style: Bold.h5,
-                                    ),
-                                    Text(
-                                      state.ingredientLength,
-                                      style: Regular.label.copyWith(
-                                        color: const Color(0xFFA9A9A9),
+                                if (state.mealDetail!.ingredients
+                                    .isNotEmpty) ...<Widget>[
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        'Ingredients',
+                                        style: Bold.h5,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                ...List<Widget>.generate(
-                                  state.mealDetail!.ingredients.length,
-                                  (int idx) {
-                                    MapEntry item = state
-                                        .mealDetail!.ingredients.entries
-                                        .toList()[idx];
-                                    return Padding(
-                                      padding: const EdgeInsets.only(bottom: 8),
-                                      child: IngredientCard(
-                                        name: item.key,
-                                        measure: item.value,
+                                      Text(
+                                        state.ingredientLength,
+                                        style: Regular.label.copyWith(
+                                          color: const Color(0xFFA9A9A9),
+                                        ),
                                       ),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(height: 16),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 16),
+                                  ...List<Widget>.generate(
+                                    state.mealDetail!.ingredients.length,
+                                    (int idx) {
+                                      MapEntry item = state
+                                          .mealDetail!.ingredients.entries
+                                          .toList()[idx];
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 8),
+                                        child: IngredientCard(
+                                          name: item.key,
+                                          measure: item.value,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(height: 16),
+                                ],
                                 Text(
                                   'Instructions',
                                   style: Bold.h5,
@@ -130,7 +145,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                                   state.mealDetail!.instructions,
                                   style: Regular.p,
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 16),
                               ],
                             ),
                           ),

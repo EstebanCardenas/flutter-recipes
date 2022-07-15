@@ -17,3 +17,10 @@ extension MapExtension on Map<String, dynamic> {
     return num.tryParse(this[key].toString()) ?? 0;
   }
 }
+
+extension StringExtension on String {
+  String get capitalize {
+    String firstLetter = this[0];
+    return replaceFirst(firstLetter, firstLetter.toUpperCase());
+  }
+}

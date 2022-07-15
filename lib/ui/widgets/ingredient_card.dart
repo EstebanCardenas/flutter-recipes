@@ -23,7 +23,7 @@ class IngredientCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              name,
+              name.capitalize,
               style: Bold.p,
             ),
             Text(
